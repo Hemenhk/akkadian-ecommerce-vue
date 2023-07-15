@@ -1,9 +1,8 @@
 <template>
-  <div class="app"><TheHeader /></div>
+  <div class="app"><RouterView /></div>
 </template>
 
 <script setup>
-import TheHeader from "./components/navigation/TheHeader.vue";
 </script>
 
 <style>

@@ -8,7 +8,7 @@
         <TheNavDrawer :isOpen="drawerIsOpen" @close-drawer="closeDrawer" />
       </div>
     </div>
-    <div><h1>Logo</h1></div>
+    <div><h1>{{logo}}</h1></div>
     <div class="cart-container"><TheCartIcon /></div>
   </div>
 </template>
@@ -16,6 +16,7 @@
 <script setup>
 import TheNavDrawer from "./TheNavDrawer.vue";
 import TheCartIcon from ".././cart-icon/TheCartIcon.vue"
+import logo from "../../assets/logo.png"
 import { ref } from "vue";
 
 const drawerIsOpen = ref(false);
