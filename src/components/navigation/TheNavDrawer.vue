@@ -87,8 +87,11 @@ const closeDrawer = () => emit("closeDrawer");
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
   z-index: 1;
+
+  background-position: right bottom;
+  
 }
 
 @keyframes openDrawer {
