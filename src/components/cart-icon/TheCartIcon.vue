@@ -1,15 +1,26 @@
 <template>
   <div class="cart-container">
     <button class="cart-icon">
-      <div>
+      <div v-if="!drawerIsOpen" @click="toggleDrawer">
         <span class="material-symbols-outlined"> local_mall </span
         ><span>1</span>
+      </div>
+      <div v-else-if="drawerIsOpen" @click="closeDrawer">
+        <TheDrawer :isOpen="drawerIsOpen" @close-drawer="closeDrawer" />
       </div>
     </button>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import TheDrawer from "./cart-drawer/TheDrawer.vue"
+
+const drawerIsOpen = ref(false);
+
+const toggleDrawer = () => (drawerIsOpen.value = true);
+const closeDrawer = () => (drawerIsOpen.value = false);
+</script>
 
 <style scoped>
 .cart-icon {

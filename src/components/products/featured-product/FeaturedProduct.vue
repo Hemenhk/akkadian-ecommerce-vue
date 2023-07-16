@@ -1,20 +1,33 @@
 <template>
   <div class="card-container">
-    <div v-for="product in products" :key="product.id">
-      <img class="image" :src="product.image" />
-      <div class="card-body">
-        <p class="product-title">{{ product.title }}</p>
-        <p class="product-price">$ {{ product.price }}</p>
-      </div>
-      <div class="btn-container">
-        <button>ADD TO CART</button>
-      </div>
+    <img class="image" :src="props.image" />
+    <div class="card-body">
+      <p class="product-title">{{ props.title }}</p>
+      <p class="product-price">$ {{ props.price }}</p>
+    </div>
+    <div class="btn-container">
+      <button>ADD TO CART</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { products } from "../../../products";
+import { defineProps } from "vue";
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+});
 </script>
 
 <style scoped>

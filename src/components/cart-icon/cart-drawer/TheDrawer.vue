@@ -1,8 +1,9 @@
 <template>
-  <Teleport to="body"
-    ><div v-if="isOpen" class="overlay" @click="closeDrawer"></div>
-    <div class="drawer-container" :class="{ 'drawer-open': isOpen }">
-      <div class="drawer-body">
+    
+        <Teleport to="#cart-drawer"
+    ><div v-if="isOpen" class="cart-overlay" @click="closeDrawer"></div>
+    <div class="cart-drawer-container" :class="{ 'cart-drawer-open': isOpen }">
+      <div class="cart-drawer-body">
         <div class="header" @click="closeDrawer">
           <font-awesome-icon class="close-button" icon="xmark" />
         </div>
@@ -14,31 +15,30 @@
 
 <script setup>
 import { defineProps, defineEmits, toRef } from "vue";
-import NavLinks from "../navlinks/NavLinks.vue";
+
 const props = defineProps({
   isOpen: {
     type: Boolean,
     required: true,
   },
-});
-
-const isOpen = toRef(props, "isOpen");
+});const isOpen = toRef(props, "isOpen");
 const emit = defineEmits(["closeDrawer"]);
 
 const closeDrawer = () => emit("closeDrawer");
 </script>
 
-<style >
-.drawer-container {
-  position: absolute;
+<style scoped >
+.cart-drawer-container {
+  position: fixed;
   top: 0;
+  right: 0;
   z-index: 100;
-  width: 300px;
+  width: 500px;
   height: 100%;
   background-color: #fafafa;
 }
 
-.drawer-body {
+.cart-drawer-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,18 +55,11 @@ const closeDrawer = () => emit("closeDrawer");
   width: 100%;
 }
 
-.links-container {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-}
-
-.drawer-open {
-  left: 0px;
-  animation: openDrawer 0.4s ease-out;
+.cart-drawer-open {
+  animation: cartOpenDrawer 0.4s ease-out;
 }
 .drawer-close {
-  left: 300px;
+  right: 400px;
   animation: closeDrawer 0.4s ease-out;
 }
 
@@ -75,25 +68,24 @@ const closeDrawer = () => emit("closeDrawer");
   cursor: pointer;
 }
 
-.overlay {
+.cart-overlay {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 1;
 
-  background-position: right bottom;
-  
+  background-position: left bottom;
 }
 
-@keyframes openDrawer {
+@keyframes cartOpenDrawer {
   from {
-    transform: translateX(-300px);
+    transform: translateX(100%);
   }
   to {
-    transform: translateX(0px);
+    transform: translateX(0%);
   }
 }
 

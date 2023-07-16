@@ -1,12 +1,16 @@
 <template>
   <div class="collection-container">
     <h2>Featured Collection</h2>
-    <FeaturedProduct
-      v-for="product in productItems"
-      :key="product.productId"
-      v-bind="product"
-      class="collection"
-    />
+    <div class="collection">
+      <FeaturedProduct
+        v-for="product in productItems"
+        :key="product.productId"
+        v-bind="product"
+        :title="product.title"
+        :price="product.price"
+        :image="product.image"
+      />
+    </div>
   </div>
 </template>
 
@@ -15,7 +19,7 @@ import FeaturedProduct from "../../products/featured-product/FeaturedProduct.vue
 import { products } from "../../../products";
 
 const productItems = products
-  .filter((product, idx) => idx < 1)
+  .filter((product, idx) => idx < 4)
   .map((product) => ({
     productId: product.id,
     ...product,
@@ -36,6 +40,6 @@ const productItems = products
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 1rem;
 }
 </style>
