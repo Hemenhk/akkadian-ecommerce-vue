@@ -6,9 +6,7 @@
         v-for="product in productItems"
         :key="product.productId"
         v-bind="product"
-        :title="product.title"
-        :price="product.price"
-        :image="product.image"
+        :productId="product.id"
       />
     </div>
   </div>
@@ -16,12 +14,15 @@
 
 <script setup>
 import FeaturedProduct from "../../products/featured-product/FeaturedProduct.vue";
-import { products } from "../../../products";
+import { useStore } from "vuex";
+
+const store = useStore();
+
+const products = store.state.product.products;
 
 const productItems = products
   .filter((product, idx) => idx < 4)
   .map((product) => ({
-    productId: product.id,
     ...product,
   }));
 </script>

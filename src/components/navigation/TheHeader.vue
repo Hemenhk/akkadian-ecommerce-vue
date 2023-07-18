@@ -8,7 +8,7 @@
         <TheNavDrawer :isOpen="drawerIsOpen" @close-drawer="closeDrawer" />
       </div>
     </div>
-    <div><h1>{{logo}}</h1></div>
+    <div><img class="image" :src="header_logo" /></div>
     <div class="cart-container"><TheCartIcon /></div>
   </div>
 </template>
@@ -20,6 +20,7 @@ import logo from "../../assets/logo.png"
 import { ref } from "vue";
 
 const drawerIsOpen = ref(false);
+const header_logo = ref(logo)
 
 // const drawerIsOpen = computed(() => isOpen.value);
 const toggleDrawer = () => {
@@ -41,6 +42,11 @@ const closeDrawer = () => {
   height: 100px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.image {
+  width: 300px;
+  cursor: pointer;
 }
 
 .drawer-icon {

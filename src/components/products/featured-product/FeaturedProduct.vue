@@ -1,33 +1,46 @@
 <template>
   <div class="card-container">
-    <img class="image" :src="props.image" />
+    <img class="image" :src="image" />
     <div class="card-body">
-      <p class="product-title">{{ props.title }}</p>
-      <p class="product-price">$ {{ props.price }}</p>
+      <p class="product-title">{{ title }}</p>
+      <p class="product-price">$ {{ price }}</p>
     </div>
     <div class="btn-container">
-      <button>ADD TO CART</button>
+      <button v-if="!isInCart(product, cartItems)" @click="addItemHandler">
+        ADD TO CART
+      </button>
+      <button v-else @click="increaseItemHandler">ADD MORE</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
+import { useStore,  } from "vuex";
+import { isInCart } from "@/helpers";
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  price: {
+  productId: {
     type: Number,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
 });
+const store = useStore();
+const product = store.state.product.products.find(
+  (product) => product.id === props.productId
+);
+const { title, image, price } = product;
+const cartItems = computed(() => store.state.cart.cartItems)
+
+
+
+const addItemHandler = () => {
+  store.commit("cart/setAddProduct", product)
+};
+
+const increaseItemHandler = () => {
+  store.commit("cart/setIncrease", product)
+};
 </script>
 
 <style scoped>

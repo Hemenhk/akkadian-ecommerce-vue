@@ -2,19 +2,27 @@
   <div class="cart-container">
     <button class="cart-icon">
       <div v-if="!drawerIsOpen" @click="toggleDrawer">
-        <span class="material-symbols-outlined"> local_mall </span
-        ><span>1</span>
+        <span class="material-symbols-outlined"> local_mall </span>
+        <p v-if="itemCount > 0">{{ itemCount }}</p>
+        <p v-else>0</p>
       </div>
       <div v-else-if="drawerIsOpen" @click="closeDrawer">
-        <TheDrawer :isOpen="drawerIsOpen" @close-drawer="closeDrawer" />
+        <TheCartDrawer :isOpen="drawerIsOpen" @close-drawer="closeDrawer" />
       </div>
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import TheDrawer from "./cart-drawer/TheDrawer.vue"
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+import TheCartDrawer from "./cart-drawer/TheCartDrawer.vue";
+
+localStorage.getItem("cart");
+
+const store = useStore();
+
+const itemCount = computed(() => store.state.cart.itemCount)
 
 const drawerIsOpen = ref(false);
 

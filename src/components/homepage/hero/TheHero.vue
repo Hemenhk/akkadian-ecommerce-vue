@@ -56,6 +56,7 @@
   background-size: 200% 100%;
   background-position: right bottom;
   color: #000;
+  border: 2px solid #fff;
   border-radius: 2px;
   transition: all 0.3s ease-out;
 
