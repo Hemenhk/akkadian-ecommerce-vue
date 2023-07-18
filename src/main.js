@@ -15,6 +15,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faXmark,
@@ -27,6 +28,7 @@ library.add(
   faTrashCan,
   faTrashAlt,
   faTrash,
+  faChevronUp
 );
 
 createApp(App)

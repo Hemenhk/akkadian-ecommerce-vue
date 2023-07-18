@@ -3,6 +3,8 @@ import DefaultLayout from "../layouts/DefaultLayout.vue";
 import HomePage from "../pages/HomePage.vue";
 import ShopPage from "../pages/shop/ShopPage.vue"
 import SingleItem from "../pages/single-item/SingleItem.vue"
+import BeardProducts from "../pages/shop/BeardProducts.vue"
+import HairProducts from "../pages/shop/HairProducts.vue"
 
 const routes = [
   {
@@ -25,7 +27,19 @@ const routes = [
         name: "Single Item",
         component: SingleItem
 
-      }
+      },
+      {
+        path: "/beard",
+        name: "Beard Products",
+        component: BeardProducts
+
+      },
+      {
+        path: "/hair",
+        name: "Hair Products",
+        component: HairProducts
+
+      },
     ],
   },
 ];
