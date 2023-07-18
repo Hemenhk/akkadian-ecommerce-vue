@@ -10,6 +10,7 @@
 <script setup>
 import TheHeader from "../components/navigation/TheHeader.vue";
 import TheFooter from "../components/footer/TheFooter.vue";
+import { RouterView } from "vue-router";
 </script>
 
 <style scoped>

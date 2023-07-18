@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import HomePage from "../pages/HomePage.vue";
+import ShopPage from "../pages/shop/ShopPage.vue"
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
         name: "Home",
         component: HomePage,
       },
+      {
+        path: "shop",
+        name: "Shop",
+        component: ShopPage
+      }
     ],
   },
 ];
