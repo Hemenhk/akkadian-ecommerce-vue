@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body"
     ><div v-if="isOpen" class="overlay" @click="closeDrawer"></div>
-    <div class="drawer-container" :class="{ 'drawer-open': isOpen }">
+    <div class="drawer-container" :class="isOpen ? 'drawer-open' : 'drawer-closed'">
       <div class="drawer-body">
         <div class="header" @click="closeDrawer">
           <font-awesome-icon class="close-button" icon="xmark" />
@@ -65,8 +65,7 @@ const closeDrawer = () => emit("closeDrawer");
   left: 0px;
   animation: openDrawer 0.4s ease-out;
 }
-.drawer-close {
-  left: 300px;
+.drawer-closed {
   animation: closeDrawer 0.4s ease-out;
 }
 

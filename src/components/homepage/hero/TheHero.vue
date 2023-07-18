@@ -11,12 +11,16 @@
       </p>
     </div>
     <div>
-      <button class="hero-button">View products</button>
+      <RouterLink to="/shop">
+        <button class="hero-button">View products</button></RouterLink
+      >
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from "vue-router";
+</script>
 
 <style scoped>
 .container {

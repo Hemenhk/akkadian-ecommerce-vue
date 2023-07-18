@@ -4,7 +4,7 @@
     <div class="product-container">
       <div class="info-container">
         <p class="title">{{ title }}</p>
-        <p class="price">{{ price }}</p>
+        <p class="price">$ {{ price }}</p>
       </div>
       <div class="btn-container">
         <button v-if="!isInCart(products, cartItems)" @click="addItemHandler">
@@ -12,13 +12,13 @@
         </button>
         <button v-else @click="increaseItemHandler">ADD MORE</button>
       </div>
-      <div>{{ description }}</div>
+      <div class="description">{{ description }}</div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {computed} from "vue"
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { isInCart } from "../../helpers";
@@ -35,7 +35,7 @@ const { title, image, price, description } = products;
 
 const addItemHandler = () => store.commit("cart/setAddProduct", products);
 const increaseItemHandler = () => store.commit("cart/setIncrease", products);
-const cartItems = computed(() => store.state.cart.cartItems)
+const cartItems = computed(() => store.state.cart.cartItems);
 </script>
 
 <style scoped>
@@ -43,7 +43,10 @@ const cartItems = computed(() => store.state.cart.cartItems)
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 3rem;
+
+  height: 60vh;
+  margin: 2rem;
 }
 
 .img-container {
@@ -85,7 +88,7 @@ const cartItems = computed(() => store.state.cart.cartItems)
 }
 
 .btn-container button {
-  width: 100%;
+  width: 200px;
   height: 50px;
   background: linear-gradient(to right, white 50%, black 50%);
   background-size: 200% 100%;
@@ -94,10 +97,21 @@ const cartItems = computed(() => store.state.cart.cartItems)
   border: 1px solid #000 !important;
   border-radius: 2px;
   transition: all 0.5s ease-out;
+
+  cursor: pointer;
 }
 
 .btn-container button:hover {
   background-position: left bottom;
   color: #000;
+}
+
+.description {
+  margin-top: 1rem;
+  width: 70%;
+
+  font-family: "noto sans";
+  font-size: .9rem;
+  line-height: 1.4rem;
 }
 </style>

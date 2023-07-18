@@ -4,7 +4,7 @@
       <div class="categories-li">Categories</div>
       <font-awesome-icon
         icon="chevron-up"
-        :class="`${'chevron'} ${isOpen ? 'chevron-up' : 'chevron-down '}`"
+        :class="`${'chevron'} ${isOpen ? 'chevron-down' : 'chevron-up '}`"
       />
     </li>
     <ul

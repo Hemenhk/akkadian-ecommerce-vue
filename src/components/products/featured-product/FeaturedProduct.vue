@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <img class="image" :src="image" />
+    <img @click="itemNavHandler" class="image" :src="image" />
     <div class="card-body">
       <p class="product-title">{{ title }}</p>
       <p class="product-price">$ {{ price }}</p>
@@ -16,7 +16,8 @@
 
 <script setup>
 import { defineProps, computed } from "vue";
-import { useStore,  } from "vuex";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import { isInCart } from "@/helpers";
 
 const props = defineProps({
@@ -26,21 +27,23 @@ const props = defineProps({
   },
 });
 const store = useStore();
+const router = useRouter();
+
 const product = store.state.product.products.find(
   (product) => product.id === props.productId
 );
 const { title, image, price } = product;
-const cartItems = computed(() => store.state.cart.cartItems)
-
-
+const cartItems = computed(() => store.state.cart.cartItems);
 
 const addItemHandler = () => {
-  store.commit("cart/setAddProduct", product)
+  store.commit("cart/setAddProduct", product);
 };
 
 const increaseItemHandler = () => {
-  store.commit("cart/setIncrease", product)
+  store.commit("cart/setIncrease", product);
 };
+
+const itemNavHandler = () => router.push(`/${props.productId}`);
 </script>
 
 <style scoped>
@@ -51,6 +54,7 @@ const increaseItemHandler = () => {
 }
 .image {
   width: 200px;
+  cursor: pointer;
 }
 .card-body {
   display: flex;
