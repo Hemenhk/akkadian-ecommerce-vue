@@ -1,15 +1,17 @@
 <template>
   <div class="nav-container">
     <ul class="nav">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Shop</a></li>
+      <li><RouterLink to="/">Home</RouterLink></li>
+      <li><RouterLink to="/shop">Shop</RouterLink></li>
       <li><a href="#">Categories</a></li>
       <li><a href="#">About</a></li>
     </ul>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from "vue-router";
+</script>
 
 <style scoped>
 .nav {
