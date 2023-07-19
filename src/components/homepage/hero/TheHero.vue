@@ -72,4 +72,14 @@ import { RouterLink } from "vue-router";
   background-color: transparent;
   color: #fff;
 }
+
+@media (max-width: 600px){
+  .container {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 0px !important;
+  }
+}
 </style>

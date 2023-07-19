@@ -27,6 +27,7 @@ const store = useStore();
 const route = useRoute();
 
 const productId = route.params.productId;
+const cartItems = computed(() => store.state.cart.cartItems);
 
 const products = store.state.product.products.find(
   (p) => Number(p.id) === Number(productId)
@@ -34,8 +35,8 @@ const products = store.state.product.products.find(
 const { title, image, price, description } = products;
 
 const addItemHandler = () => store.commit("cart/setAddProduct", products);
+
 const increaseItemHandler = () => store.commit("cart/setIncrease", products);
-const cartItems = computed(() => store.state.cart.cartItems);
 </script>
 
 <style scoped>
@@ -111,7 +112,7 @@ const cartItems = computed(() => store.state.cart.cartItems);
   width: 70%;
 
   font-family: "noto sans";
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1.4rem;
 }
 </style>

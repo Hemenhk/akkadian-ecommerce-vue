@@ -40,12 +40,13 @@ const props = defineProps({
 const store = useStore();
 
 const total = computed(() => store.state.cart.total);
+const isOpen = toRef(props, "isOpen");
+const emit = defineEmits(["closeDrawer"]);
+
+
 const clearCartHandler = () => {
   store.commit("cart/setClearCart")
 }
-
-const isOpen = toRef(props, "isOpen");
-const emit = defineEmits(["closeDrawer"]);
 
 const closeDrawer = () => emit("closeDrawer");
 </script>

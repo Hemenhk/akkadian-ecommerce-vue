@@ -23,7 +23,6 @@ localStorage.getItem("cart");
 const store = useStore();
 
 const itemCount = computed(() => store.state.cart.itemCount)
-
 const drawerIsOpen = ref(false);
 
 const toggleDrawer = () => (drawerIsOpen.value = true);

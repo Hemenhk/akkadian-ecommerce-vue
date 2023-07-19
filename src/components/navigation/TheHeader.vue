@@ -59,10 +59,28 @@ const closeDrawer = () => {
 }
 
 .cart-container {
-  margin-right: 40px;
+  margin-right: 20px;
 }
 .menu-icon {
   height: 25px;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .image {
+    width: 250px;
+  }
+}
+
+@media (max-width: 460px) {
+  .image {
+    width: 200px;
+  }
+}
+
+@media (max-width: 390px) {
+  .image {
+    width: 150px;
+  }
 }
 </style>

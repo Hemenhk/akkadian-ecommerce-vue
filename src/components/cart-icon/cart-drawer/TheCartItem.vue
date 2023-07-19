@@ -57,7 +57,9 @@ const props = defineProps({
     required: true,
   },
 });
+
 const store = useStore();
+
 const product = store.state.product.products.find(
   (product) => product.id === props.id
 );
