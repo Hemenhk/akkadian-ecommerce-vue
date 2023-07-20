@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <img @click="itemNavHandler" class="image" :src="image" />
+    <img @click="itemNavHandler" class="image" :src="imageCover" />
     <div class="card-body">
       <p class="product-title">{{ title }}</p>
       <p class="product-price">$ {{ price }}</p>
@@ -22,17 +22,23 @@ import { isInCart } from "@/helpers";
 
 const props = defineProps({
   productId: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
 const store = useStore();
 const router = useRouter();
 
-const product = store.state.product.products.find(
-  (product) => product.id === props.productId
+const product = store.state.allProducts.allProducts.find(
+  (product) => product._id === props.productId
 );
-const { title, image, price } = product;
+// const product = computed(() =>
+//   store.state.allProducts.allProducts.find(
+//     (product) => product._id === props.productId
+//   )
+// );
+
+const { title, imageCover, price } = product;
 const cartItems = computed(() => store.state.cart.cartItems);
 
 const addItemHandler = () => {

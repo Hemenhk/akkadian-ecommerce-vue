@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="img-container">
-      <img class="image" :src="props.image" />
+      <img class="image" :src="props.imageCover" />
     </div>
     <div class="item-container">
       <div>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps({
@@ -44,7 +44,7 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  image: {
+  imageCover: {
     type: String,
     required: true,
   },
@@ -60,8 +60,10 @@ const props = defineProps({
 
 const store = useStore();
 
-const product = store.state.product.products.find(
-  (product) => product.id === props.id
+const product = computed(() =>
+  store.state.allProducts.allProducts.find(
+    (product) => product._id === props.id
+  )
 );
 
 const increaseItemHandler = () => {

@@ -1,18 +1,20 @@
 <template>
-  <div class="container">
-    <div class="img-container"><img class="image" :src="image" /></div>
+  <div v-if="!isLoading" class="container">
+    <div class="img-container">
+      <img class="image" :src="product.imageCover" />
+    </div>
     <div class="product-container">
       <div class="info-container">
-        <p class="title">{{ title }}</p>
-        <p class="price">$ {{ price }}</p>
+        <p class="title">{{ product.title }}</p>
+        <p class="price">$ {{ product.price }}</p>
       </div>
       <div class="btn-container">
-        <button v-if="!isInCart(products, cartItems)" @click="addItemHandler">
+        <button v-if="!isInCart(product, cartItems)" @click="addItemHandler">
           ADD TO CART
         </button>
         <button v-else @click="increaseItemHandler">ADD MORE</button>
       </div>
-      <div class="description">{{ description }}</div>
+      <div class="description">{{ product.description }}</div>
     </div>
   </div>
 </template>
@@ -29,14 +31,15 @@ const route = useRoute();
 const productId = route.params.productId;
 const cartItems = computed(() => store.state.cart.cartItems);
 
-const products = store.state.product.products.find(
-  (p) => Number(p.id) === Number(productId)
-);
-const { title, image, price, description } = products;
+store.dispatch("product/fetchSingleProduct", productId);
 
-const addItemHandler = () => store.commit("cart/setAddProduct", products);
+const product = computed(() => store.state.product.product);
+const isLoading = computed(() => store.state.product.isLoading);
 
-const increaseItemHandler = () => store.commit("cart/setIncrease", products);
+const addItemHandler = () => store.commit("cart/setAddProduct", product.value);
+
+const increaseItemHandler = () =>
+  store.commit("cart/setIncrease", product.value);
 </script>
 
 <style scoped>
@@ -51,7 +54,11 @@ const increaseItemHandler = () => store.commit("cart/setIncrease", products);
 }
 
 .img-container {
+  display: flex;
+  justify-content: flex-end;
   margin-left: 20px;
+
+  width: 50%;
 }
 .image {
   width: 300px;
@@ -60,6 +67,9 @@ const increaseItemHandler = () => store.commit("cart/setIncrease", products);
 .product-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+
+  width: 50%;
   gap: 10px;
 }
 
@@ -109,10 +119,56 @@ const increaseItemHandler = () => store.commit("cart/setIncrease", products);
 
 .description {
   margin-top: 1rem;
-  width: 70%;
+  width: 100%;
 
   font-family: "noto sans";
   font-size: 0.9rem;
   line-height: 1.4rem;
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    height: 72vh;
+    margin-top: 4rem;
+  }
+
+  .container * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    margin-left: 0px !important;
+  }
+
+  .image {
+    width: 400px;
+  }
+
+  .product-container {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .price {
+    font-size: 1.9rem;
+  }
+
+  .btn-container * {
+    height: 70px !important;
+    width: 300px !important;
+
+    font-size: 1.1rem;
+  }
+
+  .description {
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+  }
 }
 </style>
