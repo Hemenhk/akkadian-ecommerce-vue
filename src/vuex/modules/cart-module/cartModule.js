@@ -11,7 +11,8 @@ const recalculateCart = (cartItems) => {
   saveCartItems(cartItems);
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const total = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity, 0
+    (total, item) => total + item.price * item.quantity,
+    0
   );
 
   return { itemCount, total };
@@ -27,12 +28,13 @@ const cartModule = {
   state: initialState,
   mutations: {
     setAddProduct(state, payload) {
-      const itemExists = state.cartItems.find((item) => item.id === payload.id);
+      const { id, quantity } = payload;
+      const itemExists = state.cartItems.find((item) => item.id === id);
 
       if (!itemExists) {
         state.cartItems.push({
           ...payload,
-          quantity: 1,
+          quantity: quantity || 1,
         });
       }
 
@@ -41,13 +43,25 @@ const cartModule = {
       state.total = total;
       saveCartItems(state.cartItems);
     },
-    setIncrease(state, payload) {
-      const increaseIndex = state.cartItems.findIndex(
-        (item) => item.id === payload.id
-      );
+    setAmountIncrease(state, payload) {
+      const { id, quantity } = payload;
+      const increaseIndex = state.cartItems.findIndex((item) => item.id === id);
 
-        state.cartItems[increaseIndex].quantity =
-          (state.cartItems[increaseIndex].quantity || 0) + 1;
+      state.cartItems[increaseIndex].quantity =
+        (state.cartItems[increaseIndex].quantity || 0) + quantity;
+
+      const { itemCount, total } = recalculateCart(state.cartItems);
+      state.itemCount = itemCount;
+      state.total = total;
+      saveCartItems(state.cartItems);
+    },
+    setIncrease(state, payload) {
+      const { id } = payload;
+
+      const increaseIndex = state.cartItems.findIndex((item) => item.id === id);
+
+      state.cartItems[increaseIndex].quantity =
+        (state.cartItems[increaseIndex].quantity || 0) + 1;
 
       const { itemCount, total } = recalculateCart(state.cartItems);
       state.itemCount = itemCount;
@@ -94,4 +108,4 @@ const cartModule = {
   },
 };
 
-export default cartModule
+export default cartModule;

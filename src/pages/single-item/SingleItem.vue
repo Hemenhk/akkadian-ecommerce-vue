@@ -8,25 +8,48 @@
         <p class="title">{{ product.title }}</p>
         <p class="price">$ {{ product.price }}</p>
       </div>
+      <div>
+        <p>Quantity:</p>
+        <div class="quantity-container">
+          <font-awesome-icon
+            icon="minus"
+            @click="decreaseQuantityHandler"
+            class="decrease"
+          />
+          <p class="quantity">{{ quantity }}</p>
+          <font-awesome-icon
+            icon="plus"
+            @click="increaseQuantityHandler"
+            class="increase"
+          />
+        </div>
+      </div>
       <div class="btn-container">
         <button v-if="!isInCart(product, cartItems)" @click="addItemHandler">
           ADD TO CART
         </button>
-        <button v-else @click="increaseItemHandler">ADD MORE</button>
+        <button v-else @click="addMoreItemsHandler">ADD MORE</button>
       </div>
-      <div class="description">{{ product.description }}</div>
+      <div>
+        <TheProductTabs
+          :description="product.description"
+          :ingredients="product.ingredients"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import { isInCart } from "../../helpers";
+import TheProductTabs from "../../components/products/single-item/tabs/TheProductTabs.vue";
 
 const store = useStore();
 const route = useRoute();
+const quantity = ref(1);
 
 const productId = route.params.productId;
 const cartItems = computed(() => store.state.cart.cartItems);
@@ -36,10 +59,27 @@ store.dispatch("product/fetchSingleProduct", productId);
 const product = computed(() => store.state.product.product);
 const isLoading = computed(() => store.state.product.isLoading);
 
-const addItemHandler = () => store.commit("cart/setAddProduct", product.value);
+// const addItemHandler = () => store.commit("cart/setAddProduct", product.value);
 
-const increaseItemHandler = () =>
-  store.commit("cart/setIncrease", product.value);
+const addItemHandler = () => {
+  const itemToAdd = { ...product.value, quantity: quantity.value };
+  store.commit("cart/setAddProduct", itemToAdd);
+  quantity.value = 1;
+};
+
+const addMoreItemsHandler = () => {
+  const itemToAdd = { ...product.value, quantity: quantity.value };
+  store.commit("cart/setAmountIncrease", itemToAdd);
+  quantity.value = 1;
+};
+
+const increaseQuantityHandler = () => {
+  quantity.value = quantity.value + 1;
+};
+
+const decreaseQuantityHandler = () => {
+  if (quantity.value > 1) quantity.value = quantity.value - 1;
+};
 </script>
 
 <style scoped>
@@ -55,6 +95,7 @@ const increaseItemHandler = () =>
 
 .img-container {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   margin-left: 20px;
 
@@ -89,6 +130,23 @@ const increaseItemHandler = () =>
 
 .price {
   font-family: "inter";
+}
+
+.quantity-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  border: 1px solid #dbdbdb;
+  border-radius: 2px;
+  padding: 2px 20px;
+  width: 75px;
+  height: 40px;
+}
+
+.decrease,
+.increase {
+  cursor: pointer;
 }
 
 .btn-container {

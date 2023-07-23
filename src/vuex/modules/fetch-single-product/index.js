@@ -22,7 +22,7 @@ const fetchSingleProduct = {
     async fetchSingleProduct({ commit }, productId) {
       commit("setIsLoading", true);
       try {
-        const response = await axios.get(`http://localhost:8000/api/products/${productId}`);
+        const response = await axios.get(`https://akk-api-eb96d31d9900.herokuapp.com/api/products/${productId}`);
         const product = response.data.data.product;
         commit("setProduct", product);
         commit("setIsLoading", false);
