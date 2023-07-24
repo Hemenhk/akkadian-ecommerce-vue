@@ -1,9 +1,10 @@
 <template>
   <div>
     <TheHeader />
-    <div class="main-content"><RouterView /></div>
-
-    <TheFooter />
+    <div class="wrapper">
+      <div class="main-content"><RouterView /></div>
+      <div class="footer"><TheFooter /></div>
+    </div>
   </div>
 </template>
 
@@ -14,9 +15,15 @@ import { RouterView } from "vue-router";
 </script>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  background-color: #fafafa;
+}
+
 .main_content {
   display: flex;
   justify-content: center;
-  min-height: 80vh;
 }
 </style>

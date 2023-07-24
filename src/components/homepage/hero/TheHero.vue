@@ -11,26 +11,30 @@
       </p>
     </div>
     <div>
-      <button class="hero-button">View products</button>
+      <RouterLink to="/shop">
+        <button class="hero-button">View products</button></RouterLink
+      >
     </div>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from "vue-router";
+</script>
 
 <style scoped>
 .container {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-left: 60px;
+  gap: 2rem;
+  padding-left: 60px;
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  width: 60%;
+  gap: 1.5rem;
+  width: 40%;
 }
 .hero-text h1 {
   font-size: 28px;
@@ -67,5 +71,15 @@
   background-position: left bottom;
   background-color: transparent;
   color: #fff;
+}
+
+@media (max-width: 600px){
+  .container {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: 0px !important;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="img-container">
-      <img class="image" :src="props.image" />
+      <img class="image" :src="props.imageCover" />
     </div>
     <div class="item-container">
       <div>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps({
@@ -44,7 +44,7 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  image: {
+  imageCover: {
     type: String,
     required: true,
   },
@@ -52,26 +52,30 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  id: {
+  productId: {
     type: Number,
     required: true,
   },
 });
+
 const store = useStore();
-const product = store.state.product.products.find(
-  (product) => product.id === props.id
+
+const product = computed(() =>
+  store.state.allProducts.allProducts.find(
+    (product) => product._id === props.productId
+  )
 );
 
 const increaseItemHandler = () => {
-  store.commit("cart/setIncrease", product);
+  store.commit("cart/setIncrease", product.value);
 };
 
 const decreaseItemHandler = () => {
-  store.commit("cart/setDecrease", product);
+  store.commit("cart/setDecrease", product.value);
 };
 
 const removeItemHandler = () => {
-  store.commit("cart/setRemove", product);
+  store.commit("cart/setRemove", product.value);
 };
 </script>
 
@@ -82,8 +86,8 @@ const removeItemHandler = () => {
   justify-content: space-between;
   gap: 2rem;
 
-  margin-right: 2rem;
-  margin-bottom: 2rem;
+  margin-right: 2rem !important;
+  margin-bottom: 2rem !important;
   padding-bottom: 2.5rem;
   border-bottom: 1px solid #dbdbdb;
 }
@@ -99,11 +103,17 @@ const removeItemHandler = () => {
 .item-container {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 .title {
   font-family: "noto sans";
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  padding-bottom: 0.5rem;
 }
 
 .price {

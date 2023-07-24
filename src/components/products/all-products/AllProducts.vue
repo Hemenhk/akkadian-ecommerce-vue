@@ -1,11 +1,12 @@
 <template>
   <div class="products-container">
     <h2 class="heading">Shop</h2>
-    <div class="products">
+    <div v-if="!isLoading" class="products">
       <FeaturedProduct
         v-for="product in products"
-        :key="product.id"
-        :productId="product.id"
+        v-bind="product"
+        :key="product._id"
+        :productId="product._id"
       />
     </div>
   </div>
@@ -13,11 +14,15 @@
 
 <script setup>
 import { useStore } from "vuex";
+import { computed } from "vue";
 import FeaturedProduct from "../featured-product/FeaturedProduct.vue";
 
 const store = useStore();
+store.dispatch("allProducts/fetchAllProducts");
 
-const products = store.state.product.products;
+const products = computed(() => store.state.allProducts.allProducts);
+const isLoading = computed(() => store.state.allProducts.isLoading);
+
 </script>
 
 <style scoped>
@@ -25,11 +30,14 @@ const products = store.state.product.products;
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .heading {
   font-family: "noto sans";
   font-size: 2rem;
+  margin: 3rem 0 !important;
+
 }
 
 .products {
@@ -37,6 +45,5 @@ const products = store.state.product.products;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-
 }
 </style>

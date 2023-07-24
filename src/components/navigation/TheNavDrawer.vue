@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body"
     ><div v-if="isOpen" class="overlay" @click="closeDrawer"></div>
-    <div class="drawer-container" :class="{ 'drawer-open': isOpen }">
+    <div class="drawer-container" :class="isOpen ? 'drawer-open' : 'drawer-closed'">
       <div class="drawer-body">
         <div class="header" @click="closeDrawer">
           <font-awesome-icon class="close-button" icon="xmark" />
@@ -50,8 +50,8 @@ const closeDrawer = () => emit("closeDrawer");
 .header {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1.5rem;
-  margin-right: 3rem;
+  padding-top: 2rem;
+  padding-right: 3rem;
   width: 100%;
 }
 
@@ -59,14 +59,14 @@ const closeDrawer = () => emit("closeDrawer");
   width: 100%;
   display: flex;
   align-items: flex-start;
+  padding-top: 2rem;
 }
 
 .drawer-open {
   left: 0px;
   animation: openDrawer 0.4s ease-out;
 }
-.drawer-close {
-  left: 300px;
+.drawer-closed {
   animation: closeDrawer 0.4s ease-out;
 }
 

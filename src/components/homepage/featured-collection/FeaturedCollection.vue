@@ -1,12 +1,12 @@
 <template>
   <div class="collection-container">
     <h2>Featured Collection</h2>
-    <div class="collection">
+    <div v-if="!isLoading" class="collection">
       <FeaturedProduct
-        v-for="product in productItems"
+        v-for="product in products"
         :key="product.productId"
         v-bind="product"
-        :productId="product.id"
+        :productId="product._id"
       />
     </div>
   </div>
@@ -15,16 +15,17 @@
 <script setup>
 import FeaturedProduct from "../../products/featured-product/FeaturedProduct.vue";
 import { useStore } from "vuex";
+import { computed } from "vue";
 
 const store = useStore();
 
-const products = store.state.product.products;
+store.dispatch("allProducts/fetchAllProducts");
 
-const productItems = products
-  .filter((product, idx) => idx < 4)
-  .map((product) => ({
-    ...product,
-  }));
+const products = computed(() =>
+  store.state.allProducts.allProducts.filter((product, idx) => idx < 4)
+);
+const isLoading = computed(() => store.state.allProducts.isLoading);
+
 </script>
 
 <style scoped>
@@ -32,7 +33,7 @@ const productItems = products
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 2rem;
 }
 .collection-container h2 {
   font-family: "Noto sans";

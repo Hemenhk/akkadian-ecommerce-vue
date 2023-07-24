@@ -3,7 +3,8 @@
     <ul class="nav">
       <li><RouterLink to="/">Home</RouterLink></li>
       <li><RouterLink to="/shop">Shop</RouterLink></li>
-      <li><a href="#">Categories</a></li>
+      <li><TheCategoriesDrawer /></li>
+
       <li><a href="#">About</a></li>
     </ul>
   </div>
@@ -11,6 +12,7 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
+import TheCategoriesDrawer from "../navigation/categories-drawer/TheCategoriesDrawer.vue";
 </script>
 
 <style scoped>
