@@ -100,12 +100,11 @@ const openIngHandler = () => {
 .accordion-content p {
   padding-bottom: 4px;
   font-family: "inter";
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   line-height: 1.3rem;
 }
-
 
 .accordion-open {
   animation: slideDown 0.5s ease-out;
@@ -123,6 +122,17 @@ const openIngHandler = () => {
   100% {
     opacity: 1;
     max-height: 200px;
+  }
+}
+
+@media (max-width: 440px) {
+  .accordion-container {
+    width: 300px;
+  }
+
+  .accordion-title h2 {
+    font-size: 1rem;
+    font-weight: 500 !important;
   }
 }
 </style>

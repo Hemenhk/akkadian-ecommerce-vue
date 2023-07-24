@@ -73,13 +73,35 @@ import { RouterLink } from "vue-router";
   color: #fff;
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
   .container {
     text-align: center;
     align-items: center;
     justify-content: center;
 
     padding-left: 0px !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .hero-text {
+    width: 70% !important;
+  }
+  .hero-text h1 {
+    font-size: 24px;
+  }
+
+  .hero-text p {
+    font-size: 1.1rem;
+    font-family: "inter";
+    line-height: 1.4rem;
+    color: #d4d4d4;
+  }
+
+  .hero-button {
+    font-size: 1.2rem;
+    height: 60px;
+    width: 200px;
   }
 }
 </style>

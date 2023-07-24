@@ -4,7 +4,7 @@
       <div class="img-container">
         <img class="image" :src="product.imageCover" />
       </div>
-      <div>
+      <div class="tabs-lg">
         <TheProductTabs
           :usage="product.usage"
           :ingredients="product.ingredients"
@@ -40,6 +40,12 @@
         <button v-else @click="addMoreItemsHandler">ADD MORE</button>
       </div>
       <div class="description">{{ product.description }}</div>
+    </div>
+    <div class="tabs-sm">
+      <TheProductTabs
+        :usage="product.usage"
+        :ingredients="product.ingredients"
+      />
     </div>
   </div>
 </template>
@@ -96,7 +102,6 @@ const decreaseQuantityHandler = () => {
   background-color: #fafafa;
 
   margin: 2rem 0;
-
 }
 
 .left-side {
@@ -105,10 +110,13 @@ const decreaseQuantityHandler = () => {
   align-items: center;
   justify-content: center;
   gap: 4rem;
-
 }
 .image {
   width: 400px;
+}
+
+.tabs-sm {
+  display: none;
 }
 
 .right-side {
@@ -120,7 +128,6 @@ const decreaseQuantityHandler = () => {
 
   width: 25%;
   gap: 3rem;
-
 }
 
 .info-container {
@@ -180,7 +187,7 @@ const decreaseQuantityHandler = () => {
   width: 100%;
   height: 40px;
 
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 400;
   letter-spacing: 2px;
 
@@ -205,54 +212,78 @@ const decreaseQuantityHandler = () => {
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.5rem;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 
   text-align: center;
 }
 
 @media (max-width: 600px) {
   .container {
+    align-items: center;
     flex-direction: column;
-    height: 72vh;
+
+    gap: 0.2rem;
     margin-top: 4rem;
   }
 
-  .container * {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-
-    margin-left: 0px !important;
-  }
-
   .image {
-    width: 400px;
+    width: 300px;
   }
 
-  .product-container {
-    width: 100%;
+  .right-side {
+    justify-content: center;
+    align-items: center;
+    width: 90% !important;
   }
 
   .title {
     font-size: 2rem;
+    text-align: center;
   }
 
   .price {
-    font-size: 1.9rem;
+    font-size: 1.5rem;
+    text-align: center;
   }
 
-  .btn-container * {
-    height: 70px !important;
-    width: 300px !important;
+  .quantity-container p {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 
-    font-size: 1.1rem;
+  .quantity-selector {
+    width: 150px;
+    height: 70px;
+  }
+
+  .decrease,
+  .increase {
+    width: 20px;
+  }
+
+  .btn-container button {
+    height: 80px;
+    font-size: 1.2rem;
   }
 
   .description {
-    margin-top: 3rem;
     font-size: 1.2rem;
-    line-height: 1.7rem;
+    line-height: 1.6rem;
+    padding-bottom: 5rem;
+  }
+
+  .tabs-lg {
+    display: none;
+  }
+
+  .tabs-sm {
+    display: block;
+  }
+}
+
+@media (max-width: 440px) {
+  .description {
+    font-size: 1.2rem;
   }
 }
 </style>
