@@ -32,7 +32,7 @@ import FeaturedCollection from "../components/homepage/featured-collection/Featu
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
     url("../assets/images/hero_image.jpg") center/cover no-repeat;
   height: 600px;
-  margin: 20px;
+  margin: 20px !important;
 }
 
 .collection-container {

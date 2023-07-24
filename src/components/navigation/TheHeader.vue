@@ -45,7 +45,7 @@ const closeDrawer = () => {
   align-items: center;
 
   height: 100px;
-  padding-bottom: 20px;
+  padding: 20px 40px;
   border-bottom: 1px solid rgb(230, 230, 230);
 }
 

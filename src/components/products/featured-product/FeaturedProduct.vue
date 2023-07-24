@@ -66,17 +66,22 @@ const itemNavHandler = () => router.push(`/${props.productId}`);
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-top: 5px;
+  padding-top: 2rem;
 }
 .product-title {
   font-family: "noto sans";
-  font-weight: 500;
-  font-size: 1.1rem;
+  font-weight: 400;
+  font-size: .9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  padding-bottom: .5rem;
 }
 
 .product-price {
   font-family: "inter";
   font-weight: 400;
+  padding-bottom: 2rem;
 }
 
 .btn-container {
@@ -87,9 +92,8 @@ const itemNavHandler = () => router.push(`/${props.productId}`);
 .btn-container button {
   width: 100%;
   font-family: "noto sans";
-  font-family: "inter";
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: .8rem;
+  font-weight: 400;
   height: 45px;
   background: linear-gradient(to right, white 50%, black 50%);
   background-size: 200% 100%;

@@ -17,9 +17,9 @@ import FeaturedProduct from "../../components/products/featured-product/Featured
 
 const store = useStore();
 
-const products = store.state.product.products;
+const products = store.state.allProducts.allProducts;
 const filteredProducts = products.filter((product) =>
-  product.category.includes("hair")
+  product.categories.includes("hair")
 );
 </script>
 
@@ -33,7 +33,7 @@ const filteredProducts = products.filter((product) =>
 
 .container h2 {
   font-family: "noto sans";
-  margin: 3rem 0;
+  margin: 3rem 0 !important;
 }
 
 .hair-products {

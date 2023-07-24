@@ -1,16 +1,25 @@
 <template>
   <div v-if="!isLoading" class="container">
-    <div class="img-container">
-      <img class="image" :src="product.imageCover" />
+    <div class="left-side">
+      <div class="img-container">
+        <img class="image" :src="product.imageCover" />
+      </div>
+      <div>
+        <TheProductTabs
+          :usage="product.usage"
+          :ingredients="product.ingredients"
+        />
+      </div>
     </div>
-    <div class="product-container">
+
+    <div class="right-side">
       <div class="info-container">
         <p class="title">{{ product.title }}</p>
         <p class="price">$ {{ product.price }}</p>
       </div>
-      <div>
+      <div class="quantity-container">
         <p>Quantity:</p>
-        <div class="quantity-container">
+        <div class="quantity-selector">
           <font-awesome-icon
             icon="minus"
             @click="decreaseQuantityHandler"
@@ -30,12 +39,7 @@
         </button>
         <button v-else @click="addMoreItemsHandler">ADD MORE</button>
       </div>
-      <div>
-        <TheProductTabs
-          :description="product.description"
-          :ingredients="product.ingredients"
-        />
-      </div>
+      <div class="description">{{ product.description }}</div>
     </div>
   </div>
 </template>
@@ -86,38 +90,43 @@ const decreaseQuantityHandler = () => {
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 3rem;
+  align-items: flex-start;
+  gap: 4rem;
 
-  height: 60vh;
-  margin: 2rem;
+  background-color: #fafafa;
+
+  margin: 2rem 0;
+
 }
 
-.img-container {
+.left-side {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
 
-  width: 50%;
 }
 .image {
-  width: 300px;
+  width: 400px;
 }
 
-.product-container {
+.right-side {
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  width: 50%;
-  gap: 10px;
+  margin-top: 8rem !important;
+
+  width: 25%;
+  gap: 3rem;
+
 }
 
 .info-container {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1rem;
 }
 
 .title {
@@ -131,8 +140,18 @@ const decreaseQuantityHandler = () => {
 .price {
   font-family: "inter";
 }
-
 .quantity-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quantity-container p {
+  font-family: "inter";
+  font-size: 0.8rem;
+}
+
+.quantity-selector {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -141,24 +160,30 @@ const decreaseQuantityHandler = () => {
   border-radius: 2px;
   padding: 2px 20px;
   width: 75px;
-  height: 40px;
+  height: 30px;
 }
 
 .decrease,
 .increase {
   cursor: pointer;
+  width: 10px;
 }
 
 .btn-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 90%;
+  width: 100%;
 }
 
 .btn-container button {
-  width: 200px;
-  height: 50px;
+  width: 100%;
+  height: 40px;
+
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+
   background: linear-gradient(to right, white 50%, black 50%);
   background-size: 200% 100%;
   background-position: right bottom;
@@ -176,12 +201,13 @@ const decreaseQuantityHandler = () => {
 }
 
 .description {
-  margin-top: 1rem;
-  width: 100%;
+  font-family: "inter";
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  letter-spacing: .5px;
 
-  font-family: "noto sans";
-  font-size: 0.9rem;
-  line-height: 1.4rem;
+  text-align: center;
 }
 
 @media (max-width: 600px) {

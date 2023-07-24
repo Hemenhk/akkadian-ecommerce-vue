@@ -50,8 +50,8 @@ const closeDrawer = () => emit("closeDrawer");
 .header {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1.5rem;
-  margin-right: 3rem;
+  padding-top: 2rem;
+  padding-right: 3rem;
   width: 100%;
 }
 
@@ -59,6 +59,7 @@ const closeDrawer = () => emit("closeDrawer");
   width: 100%;
   display: flex;
   align-items: flex-start;
+  padding-top: 2rem;
 }
 
 .drawer-open {

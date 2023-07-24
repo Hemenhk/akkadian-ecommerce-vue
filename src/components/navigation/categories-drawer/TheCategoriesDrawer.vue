@@ -77,7 +77,7 @@ const openDrawerHandler = () => (isOpen.value = !isOpen.value);
   flex-direction: column;
   gap: 10px;
 
-  margin-left: 20px;
+  padding-left: 20px !important;
   padding: 20px 0;
 
   animation-name: slideDown;
@@ -86,6 +86,7 @@ const openDrawerHandler = () => (isOpen.value = !isOpen.value);
 .nested-drawer li {
   width: 50%;
 
+  list-style: none;
   padding-bottom: 0.9rem;
   border-bottom: 1px solid #dbdbdb;
 }
@@ -107,7 +108,7 @@ const openDrawerHandler = () => (isOpen.value = !isOpen.value);
   flex-direction: column;
   gap: 10px;
 
-  margin-left: 20px;
+  padding-left: 20px !important;
   padding: 20px 0;
 }
 

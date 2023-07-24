@@ -17,9 +17,9 @@ import FeaturedProduct from "../../components/products/featured-product/Featured
 
 const store = useStore();
 
-const products = store.state.product.products;
+const products = store.state.allProducts.allProducts;
 const filteredProducts = products.filter((product) =>
-  product.category.includes("beard")
+  product.categories.includes("beard")
 );
 </script>
 
@@ -33,7 +33,7 @@ const filteredProducts = products.filter((product) =>
 
 .container h2 {
     font-family: "noto sans";
-    margin: 3rem 0;
+    margin: 3rem 0 !important;
 }
 
 .beard-products {

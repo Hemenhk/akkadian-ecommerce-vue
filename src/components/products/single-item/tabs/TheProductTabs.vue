@@ -1,24 +1,47 @@
 <template>
-  <div class="accordion">
-    <div v-for="item in accordionItems" :key="item.id" class="accordion-item">
-      <button
-        @click="toggleAccordionItem(item.id)"
-        :class="{ active: item.isOpen }"
+  <div class="accordion-container">
+    <div class="accordion-usage">
+      <div @click="openUsageHandler" class="accordion-title">
+        <h2>Usage</h2>
+
+        <font-awesome-icon icon="plus" v-if="!isOpen.usageIsOpen" />
+        <font-awesome-icon v-else icon="minus" />
+      </div>
+      <div
+        v-if="isOpen.usageIsOpen"
+        :class="`${'accordion-content'} ${isOpen && 'accordion-open'}`"
       >
-        {{ item.title }}
-      </button>
-      <div v-if="item.isOpen" :class="['content', { open: item.isOpen }]">
-        {{ item.content }}
+        <p>{{ props.usage }}</p>
+      </div>
+    </div>
+    <div class="accordion-ingredients">
+      <div @click="openIngHandler" class="accordion-title">
+        <h2>Ingredients</h2>
+
+        <font-awesome-icon icon="plus" v-if="!isOpen.ingIsOpen" />
+        <font-awesome-icon v-else icon="minus" />
+      </div>
+
+      <div
+        v-if="isOpen.ingIsOpen"
+        :class="`${'accordion-content'} ${isOpen && 'accordion-open'}`"
+      >
+        <p>{{ props.ingredients }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { defineProps, reactive } from "vue";
+
+const isOpen = reactive({
+  usageIsOpen: false,
+  ingIsOpen: false,
+});
 
 const props = defineProps({
-  description: {
+  usage: {
     type: String,
     required: true,
   },
@@ -28,87 +51,78 @@ const props = defineProps({
   },
 });
 
-const accordionItems = ref([
-  {
-    id: 1,
-    title: "Information",
-    content: props.description,
-    isOpen: false,
-  },
-  {
-    id: 2,
-    title: "Ingredients",
-    content: props.ingredients,
-    isOpen: false,
-  },
-  {
-    id: 3,
-    title: "Accordion Item 3",
-    content: "Content for Accordion Item 3",
-    isOpen: false,
-  },
-]);
+const openUsageHandler = () => {
+  isOpen.usageIsOpen = !isOpen.usageIsOpen;
+};
 
-const toggleAccordionItem = (itemId) => {
-  accordionItems.value.forEach((item) => {
-    if (item.id === itemId) {
-      item.isOpen = !item.isOpen;
-    } else {
-      item.isOpen = false;
-    }
-  });
+const openIngHandler = () => {
+  isOpen.ingIsOpen = !isOpen.ingIsOpen;
 };
 </script>
 
-<style scoped>
-.accordion {
+<style>
+.accordion-container {
+  margin-bottom: 10px;
+  width: 400px;
+}
+
+.accordion-title {
   display: flex;
-  flex-direction: column;
-  border-top: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-}
+  justify-content: space-between;
+  align-items: center;
 
-.accordion-item {
-  border-bottom: 1px solid #ccc;
-}
-
-button {
-  background: none;
-  border: none;
   cursor: pointer;
-  padding: 8px 12px;
-  font-size: 16px;
-  width: 100%;
-  text-align: left;
-  outline: none;
+  padding: 30px 0;
 }
 
-button.active {
-  background-color: lightblue;
+.accordion-title h2 {
+  font-family: "inter";
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.content {
-  padding: 10px;
-  max-height: 0;
-  overflow: hidden;
-  animation: 0.3s ease-out forwards;
+.accordion-usage {
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
 }
 
-.content.open {
-  display: flex;
-  animation-name: openAccordion;
-  /* max-height: 1000px;  */
+.accordion-ingredients {
+  border-bottom: 1px solid #dbdbdb;
 }
 
-@keyframes openAccordion {
-  from {
-    max-height: 0;
+.accordion-content {
+  padding: 1rem 0;
+  height: auto;
+}
+
+.accordion-content p {
+  padding-bottom: 4px;
+  font-family: "inter";
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: .5px;
+  line-height: 1.3rem;
+}
+
+
+.accordion-open {
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  0% {
     opacity: 0;
+    max-height: 0;
   }
-  to {
-    max-height: 300px;
+  50% {
+    opacity: 50%;
+    max-height: 100px;
+  }
+  100% {
     opacity: 1;
+    max-height: 200px;
   }
 }
 </style>

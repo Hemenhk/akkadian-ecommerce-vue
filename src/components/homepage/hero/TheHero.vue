@@ -26,15 +26,15 @@ import { RouterLink } from "vue-router";
 .container {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-left: 60px;
+  gap: 2rem;
+  padding-left: 60px;
 }
 
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  width: 60%;
+  gap: 1.5rem;
+  width: 40%;
 }
 .hero-text h1 {
   font-size: 28px;
@@ -79,7 +79,7 @@ import { RouterLink } from "vue-router";
     align-items: center;
     justify-content: center;
 
-    margin-left: 0px !important;
+    padding-left: 0px !important;
   }
 }
 </style>

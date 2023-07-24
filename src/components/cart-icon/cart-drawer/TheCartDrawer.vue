@@ -43,10 +43,9 @@ const total = computed(() => store.state.cart.total);
 const isOpen = toRef(props, "isOpen");
 const emit = defineEmits(["closeDrawer"]);
 
-
 const clearCartHandler = () => {
-  store.commit("cart/setClearCart")
-}
+  store.commit("cart/setClearCart");
+};
 
 const closeDrawer = () => emit("closeDrawer");
 </script>
@@ -68,8 +67,10 @@ const closeDrawer = () => emit("closeDrawer");
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 2rem;
+  padding: 1rem 2rem;
   width: 90%;
+
+  padding-bottom: 1rem;
   border-bottom: 1px solid #e6e6e6;
 }
 
@@ -78,7 +79,8 @@ const closeDrawer = () => emit("closeDrawer");
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1rem 2rem;
+  margin: 1rem 2rem !important;
+  overflow-y: hidden;
 
   width: 90%;
 
@@ -91,6 +93,10 @@ const closeDrawer = () => emit("closeDrawer");
   overflow-y: auto; /* Add overflow-y property */
 }
 
+.cart-dropdown-container::-webkit-scrollbar {
+  display: none;
+}
+
 .cart-drawer-footer {
   display: flex;
   flex-direction: column;
@@ -99,8 +105,8 @@ const closeDrawer = () => emit("closeDrawer");
 
   gap: 1rem;
 
-  margin: 1rem 2rem;
-  margin-right: 1rem;
+  margin: 1rem 2rem !important;
+  margin-right: 1rem !important;
   background-color: #fafafa;
 
   width: 90%;
@@ -123,7 +129,7 @@ const closeDrawer = () => emit("closeDrawer");
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .8rem;
+  gap: 0.8rem;
 
   background: linear-gradient(to right, white 50%, black 50%);
   background-size: 200% 100%;
@@ -156,7 +162,7 @@ const closeDrawer = () => emit("closeDrawer");
 .close-button {
   height: 25px;
   cursor: pointer;
-  margin-right: 1rem;
+  margin-right: 1rem !important;
 }
 
 .cart-overlay {

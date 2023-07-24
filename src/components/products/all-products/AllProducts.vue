@@ -30,11 +30,14 @@ const isLoading = computed(() => store.state.allProducts.isLoading);
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .heading {
   font-family: "noto sans";
   font-size: 2rem;
+  margin: 3rem 0 !important;
+
 }
 
 .products {

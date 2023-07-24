@@ -33,7 +33,7 @@ const isLoading = computed(() => store.state.allProducts.isLoading);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 2rem;
 }
 .collection-container h2 {
   font-family: "Noto sans";

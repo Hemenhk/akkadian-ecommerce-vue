@@ -24,7 +24,7 @@
   justify-content: space-between;
   align-items: center;
   height: 300px;
-  margin: 20px 50px;
+  padding: 20px 50px;
 }
 
 .perks {
@@ -41,7 +41,7 @@
   font-weight: 600;
   text-align: center;
   color: #343434;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .perks p {
@@ -60,7 +60,7 @@
   color: #cecece;
   transition: 0.5s ease-out;
 
-  margin-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .menu-icon:hover {
@@ -73,6 +73,7 @@
     flex-direction: column;
     gap: 1rem;
     height: 600px;
+    padding-bottom: 5rem;
   }
   .perks {
     width: 80%;
